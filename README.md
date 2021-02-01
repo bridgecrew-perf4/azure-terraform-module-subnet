@@ -1,107 +1,44 @@
-# {{ project_name }}
+# Change this README accordingly
 
-[![pre-commit badge][pre-commit-badge]][pre-commit] [![Conventional commits badge][conventional-commits-badge]][conventional-commits] [![Keep a Changelog v1.1.0 badge][keep-a-changelog-badge]][keep-a-changelog] [![MIT License Badge][license-badge]][license]
+[//]: # (Do NOT make manual changes below this line! Automatic generation of content!)
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+## Requirements
 
-# Overview
-The repository and it's dependencies can be automatically setup by running an interactive script, that will run a makefile according to the interactive choices made.
+| Name | Version |
+|------|---------|
+| terraform | >= 0.12.26 |
+| azurerm | >= 2.0 |
 
-When this script finishes, the repository will be ready to use!
+## Providers
 
-# Getting started
+| Name | Version |
+|------|---------|
+| azurerm | >= 2.0 |
 
-After git cloning this repo:
-1. Run:
-    ```bash
-    .first-setup/start.sh
-    ```
-2. Choose option "1":
-    ```
-    ### START USING YOUR REPOSITORY ###
-    (to abort, Ctrl-C)
-    -> Please choose the repo type you
-    -> want to configure or to rebuild
-    -> the configuration!
-    What do you want to do?
-    1) First Time Setup
-    2) Reset config
-    #? 1
-    ```
-3. Choose the which repository type you wish to configure:
-    ```
-    Which type of repository will this be?
-    1) generic
-    2) terraform
-    #? 1
-    ```
-4. If at any time you are asked for sudo privileges, input your password accordingly (you will only be asked once):
-    ```
-    [sudo] password for XXXXX:
-    ```
-5. When presented with the following question (git-chglog configuration):
-    ```
-    ? What is the URL of your repository?
-    ```
-   fill this and all following questions with the presented default values:
-    ```
-    ? What is the URL of your repository? https://github.com/k0kazpt/test-cookiecutter
-    ? What is your favorite style? github
-    ? Choose the format of your favorite commit message <type>(<scope>): <subject>
-    ? What is your favorite template style? keep-a-changelog
-    ? Do you include Merge Commit in CHANGELOG? Yes
-    ? Do you include Revert Commit in CHANGELOG? Yes
-    ? In which directory do you output configuration files and templates? .chglog
-    ```
-6. ✔ Finished!! ✔
-    ```
-    -> Repo setup successfull!
-    ```
+## Inputs
 
-## To reset and reconfigure
-1. Run:
-    ```bash
-    .first-setup/start.sh
-    ```
-2. Choose option "2":
-    ```
-    ### START USING YOUR REPOSITORY ###
-    (to abort, Ctrl-C)
-    -> Please choose the repo type you
-    -> want to configure or to rebuild
-    -> the configuration!
-    What do you want to do?
-    1) First Time Setup
-    2) Reset config
-    #? 2
-    ```
-3. You'll be shown the following message:
-    ```
-    -> Resetting repository metadata:
-    rm -f ../.repo_metadata/.DONE 2>/dev/null
-    rm -f ../.repo_metadata/.repo_* 2>/dev/null
-    -> To reconfigure, run ./first-setup/start.sh again!
-    ```
-4. To reconfigure, follow the instructions in [Getting started](#Getting-started)
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| address\_prefixes | The address prefix list to use for the subnet. Example: ["10.10.10.0/28", "10.10.10.16/28"] | `list(string)` | n/a | yes |
+| enforce\_private\_link | Enable or Disable network policies for the private link endpoint on the subnet | `bool` | `false` | no |
+| name | The name (should follow a consistent naming covention) which will be used for the name generation of this Subnet. | `string` | n/a | yes |
+| network\_security\_group\_name | The Network Security Group name to associate with the subnets | `string` | `null` | no |
+| network\_security\_group\_rg | The Network Security Group RG to associate with the subnet. Default is the same RG than the subnet. | `string` | `null` | no |
+| resource\_group\_name | Resource group name | `string` | n/a | yes |
+| route\_table\_name | The Route Table name to associate with the subnet | `string` | `null` | no |
+| route\_table\_rg | The Route Table RG to associate with the subnet. Default is the same RG than the subnet. | `string` | `null` | no |
+| service\_endpoints | The list of Service endpoints to associate with the subnet | `list(string)` | `[]` | no |
+| subnet\_delegation | Configuration delegations on subnet<br>object({<br>  name = object({<br>    name = string,<br>    actions = list(string)<br>  })<br>}) | `map(list(any))` | `{}` | no |
+| virtual\_network\_name | Virtual network name | `string` | n/a | yes |
 
-***
-# References
-## conventional commits
-https://www.conventionalcommits.org/
+## Outputs
 
-## pre-commit hooks
+| Name | Description |
+|------|-------------|
+| cidr\_list | CIDR list of the created subnets |
+| cidrs\_map | Map with names and CIDRs of the created subnets |
+| id | Id of the created subnet |
+| ips | The collection of IPs within this subnet |
+| name | Names of the created subnet |
 
-Read the [pre-commit hooks](docs/pre-commit-hooks.md) document for more info.
-
-## git-chglog
-
-Read the [git-chglog](docs/git-chlog.md) document for more info.
-
-[pre-commit]: https://github.com/pre-commit/pre-commit
-[pre-commit-badge]: https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white
-[conventional-commits-badge]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-green.svg
-[conventional-commits]: https://conventionalcommits.org
-[keep-a-changelog-badge]: https://img.shields.io/badge/changelog-Keep%20a%20Changelog%20v1.1.0-%23E05735
-[keep-a-changelog]: https://keepachangelog.com/en/1.0.0/
-[license]: ./LICENSE
-[license-badge]: https://img.shields.io/badge/license-MIT-green.svg
-[changelog]: ./CHANGELOG.md
-[changelog-badge]: https://img.shields.io/badge/changelog-Keep%20a%20Changelog%20v1.1.0-%23E05735
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
