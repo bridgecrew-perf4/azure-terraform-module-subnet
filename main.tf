@@ -24,11 +24,13 @@ resource "azurerm_subnet" "subnet" {
 }
 
 resource "azurerm_subnet_network_security_group_association" "subnet_association" {
+  for_each                  = var.network_security_group_id
   subnet_id                 = azurerm_subnet.subnet.id
   network_security_group_id = var.network_security_group_id
 }
 
 resource "azurerm_subnet_route_table_association" "route_table_association" {
+  for_each       = var.route_table_id
   subnet_id      = azurerm_subnet.subnet.id
   route_table_id = var.route_table_id
 }
