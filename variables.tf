@@ -18,8 +18,8 @@ variable "address_prefixes" {
   type        = list(string)
 }
 
-variable "route_table_name" {
-  description = "The Route Table name to associate with the subnet"
+variable "route_table_id" {
+  description = "The Route Table ID to associate with the subnet"
   type        = string
   default     = null
 }
@@ -30,8 +30,8 @@ variable "route_table_rg" {
   default     = null
 }
 
-variable "network_security_group_name" {
-  description = "The Network Security Group name to associate with the subnets"
+variable "network_security_group_id" {
+  description = "The Network Security Group ID to associate with the subnets"
   type        = string
   default     = null
 }
